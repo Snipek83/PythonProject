@@ -1,5 +1,7 @@
 import pygame
 
+#описание констант
+
 WIDTH = 600
 HEIGHT = 800
 
@@ -11,6 +13,7 @@ RED = (255, 0, 0)
 GREEN = (0, 255, 0)
 BLUE = (0, 0, 255)
 
+#описание классов
 
 class Player(pygame.sprite.Sprite):
     def __init__(self):
@@ -48,6 +51,8 @@ all_sprites = pygame.sprite.Group()
 player = Player()
 all_sprites.add(player)
 
+
+#начало программы
 running = True
 while running:
     clock.tick(FPS)
