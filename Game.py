@@ -5,7 +5,6 @@ HEIGHT = 800
 
 FPS = 60
 
-
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
 RED = (255, 0, 0)
@@ -36,13 +35,12 @@ class Player(pygame.sprite.Sprite):
         if self.rect.right > WIDTH:
             self.rect.right = WIDTH
         if self.rect.left < 0:
-                self.rect.left = 0
-
+            self.rect.left = 0
 
 
 pygame.init()
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
-#screen = pygame.display.set_mode((WIDTH, HEIGHT))
+# screen = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("My Snipe Game")
 clock = pygame.time.Clock()
 
@@ -53,13 +51,12 @@ all_sprites.add(player)
 running = True
 while running:
     clock.tick(FPS)
-    for event in pygame.event.get():  #кнопка крестик
-        if event.type == pygame.QUIT: #кнопка крестик
-            running = False           #кнопка крестик
+    for event in pygame.event.get():  # кнопка крестик
+        if event.type == pygame.QUIT:  # кнопка крестик
+            running = False  # кнопка крестик
     screen.fill(BLACK)
 
     all_sprites.update()
     all_sprites.draw(screen)
-    pygame.display.flip()  #заливка черным цветом
+    pygame.display.flip()  # заливка черным цветом
 pygame.quit()
-
