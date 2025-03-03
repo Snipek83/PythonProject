@@ -83,12 +83,22 @@ class Bullet(pygame.sprite.Sprite):
         if self.rect.bottom < 0:
             self.kill()
 
+def draw_text(text, size, color, x, y):
+    font = pygame.font.Font(font_name, size)
+    surface = font.render(text, True, color)
+    rect = surface.get_rect()
+    rect.midtop = (x, y)
+    screen.blit(surface, rect)
 
 pygame.init()
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 # screen = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("My Snipe Game")
 clock = pygame.time.Clock()
+
+score = 0
+delay = 0
+font_name = pygame.font.match_font('arial')
 
 all_sprites = pygame.sprite.Group()
 enemies = pygame.sprite.Group()
@@ -117,10 +127,23 @@ while running:
 
     hits = pygame.sprite.spritecollide(player, enemies, False)
     if hits:
+        delay = 3000
         running = False
 
     hits = pygame.sprite.groupcollide(enemies, bullets, True, True)
+    for hit in hits:
+        score += 1
+        enemy = Enemy()
+        enemies.add(enemy)
+        all_sprites.add(enemy)
+
     screen.fill(BLACK)
+    draw_text(f' Очки: {score}', 18,WHITE, WIDTH / 2, 10)
+    if delay == 0:
+        all_sprites.draw(screen)
+    else:
+        draw_text("Game Over", 50, RED, WIDTH / 2, HEIGHT / 2 - 50)
     all_sprites.draw(screen)
-    pygame.display.flip()  # заливка черным цветом
+    pygame.display.flip()
+pygame.time.delay(delay)
 pygame.quit()
